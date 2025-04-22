@@ -2,9 +2,6 @@
   "name": "fuwari",
   "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
