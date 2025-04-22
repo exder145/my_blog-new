@@ -62,3 +62,14 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm new-post <filename>`          | Create a new post                                |
 | `pnpm astro ...`                    | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro --help`                 | Get help using the Astro CLI                     |
+
+## 部署问题解决
+
+如果您在GitHub Actions中遇到构建或部署失败的问题，请尝试以下解决方案：
+
+1. **Node.js版本**：确保在所有工作流文件中使用一致的Node.js版本（推荐使用LTS版本，如Node.js 20或22）
+2. **包管理器**：确保一致使用pnpm，并且版本与package.json中指定的相同（目前为9.14.4）
+3. **base路径**：在astro.config.mjs中确保base路径与仓库名称一致（目前为/my_blog-new/）
+4. **依赖安装**：在本地尝试运行`pnpm install --frozen-lockfile`和`pnpm build`来验证构建过程
+
+如果仍然遇到问题，请检查GitHub Actions日志以获取更详细的错误信息。
