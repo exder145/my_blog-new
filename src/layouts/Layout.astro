@@ -146,6 +146,10 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
+		<!-- 自定义运行时间显示 -->
+		<link rel="stylesheet" href={url('/css/runtime-variables.css')} />
+		<link rel="stylesheet" href={url('/css/runtime.css')} />
+		<script src={url('/js/runtime.js')} defer></script>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
@@ -158,6 +162,33 @@ const bannerOffset =
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
+
+<!-- 自定义提示窗口 -->
+<div id="custom-toast" class="fixed top-0 left-0 right-0 z-[9999] bg-[var(--primary)] text-white py-3 opacity-0 transition-all duration-300 transform -translate-y-full text-center shadow-lg">
+    <div id="toast-message" class="text-base font-medium"></div>
+</div>
+
+<script>
+    // 自定义提示窗口函数
+    function showCustomToast(message, duration = 2000) {
+        const toast = document.getElementById('custom-toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        if (toast && toastMessage) {
+            toastMessage.textContent = message;
+            toast.classList.remove('opacity-0', '-translate-y-full');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-full');
+            }, duration);
+        }
+    }
+
+    // 将函数添加到全局作用域
+    window.showCustomToast = showCustomToast;
+</script>
 
 <style is:global define:vars={{
 	bannerOffset,
@@ -328,13 +359,13 @@ function initCustomScrollbar() {
 
 function showBanner() {
 	if (!siteConfig.banner.enable) return;
-	
+
 	const banner = document.getElementById('banner');
 	if (!banner) {
 		console.error('Banner element not found');
 		return;
 	}
-	
+
 	banner.classList.remove('opacity-0', 'scale-105');
 }
 

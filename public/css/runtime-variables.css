@@ -1,0 +1,13 @@
+:root {
+  --primary-rgb: 40, 180, 200; /* 默认颜色的RGB值，对应#28b4c8 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-rgb: 40, 180, 200;
+  }
+}
+
+html.dark {
+  --primary-rgb: 40, 180, 200;
+}
