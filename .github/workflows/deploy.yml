@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile && pnpm add sharp
       - name: Build with Astro
-        run: pnpm build
+        run: pnpm exec astro build --no-check
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

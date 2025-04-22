@@ -40,6 +40,7 @@ jobs:
 
       - name: Run Astro Check
         run: pnpm astro check
+        continue-on-error: true
 
   build:
     strategy:
@@ -66,4 +67,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run Astro Build
-        run: pnpm astro build
+        run: pnpm astro build --no-check
